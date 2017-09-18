@@ -1,3 +1,5 @@
+provider "aws" {}
+
 resource "aws_dynamodb_table" "lock_table" {
 
   name           = "${var.table_name}"
@@ -10,8 +12,4 @@ resource "aws_dynamodb_table" "lock_table" {
     type = "S"
   }
 
-}
-
-output "locak_table_arn" {
-  value = "${aws_dynamodb_table.lock_table.arn}""
 }

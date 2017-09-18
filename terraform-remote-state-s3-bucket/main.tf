@@ -1,3 +1,5 @@
+provider "aws" {}
+
 resource "aws_s3_bucket" "state_bucket" {
 
   bucket = "${var.bucket_name}"
@@ -10,8 +12,4 @@ resource "aws_s3_bucket" "state_bucket" {
     prevent_destroy = true
   }
 
-}
-
-output "s3_bucket_arn" {
-  value = "${aws_s3_bucket.state_bucket.arn}""
 }
