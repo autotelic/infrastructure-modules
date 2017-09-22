@@ -3,6 +3,12 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name = "${var.domain_name}"
     origin_id   = "${var.origin_id}"
+    custom_origin_config {
+      origin_protocol_policy = "http-only"
+      http_port              = "80"
+      https_port             = "443"
+      origin_ssl_protocols   = ["TLSv1"]
+    }
   }
 
   enabled = true
