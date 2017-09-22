@@ -1,5 +1,5 @@
 variable "origin_id" {
- description = "The unique ID for the cloudfront distribution" 
+ description = "The unique ID for the cloudfront distribution"
 }
 
 variable "domain_name" {
@@ -8,5 +8,4 @@ variable "domain_name" {
 
 variable "aliases" {
   description = "cNAMEs for the distribution"
-  type        = "list"
 }

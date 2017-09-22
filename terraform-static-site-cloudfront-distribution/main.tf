@@ -1,5 +1,5 @@
 resource "aws_cloudfront_distribution" "s3_distribution" {
-  
+
   origin {
     domain_name = "${var.domain_name}"
     origin_id   = "${var.origin_id}"
@@ -11,9 +11,11 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
   }
 
+  price_class = "PriceClass_100"
+
   enabled = true
 
-  aliases = "${var.aliases}"
+  aliases = ["${var.aliases}"]
 
   default_cache_behavior {
     allowed_methods  = [ "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT" ]
@@ -25,16 +27,16 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
         forward = "none"
       }
     }
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0
     default_ttl            = 3600
     max_ttl                = 86400
   }
-  
+
   viewer_certificate {
     cloudfront_default_certificate = true
   }
-  
+
   restrictions {
     geo_restriction {
       restriction_type = "none"
