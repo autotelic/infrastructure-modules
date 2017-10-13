@@ -6,5 +6,5 @@ variable "repo_name" {
 }
 variable "permission" {
   description = "The permission levels for the team members"
-  default     = "push"
+  default     = "pull"
 }
