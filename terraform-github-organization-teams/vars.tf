@@ -8,5 +8,5 @@ variable "team_description" {
 
 variable "team_privacy" {
   description = "The privacy setting for the team"
-  default     = "closed"
+  default     = "secret"
 }
