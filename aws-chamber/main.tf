@@ -1,3 +1,5 @@
+provider "aws" {}
+
 resource "aws_kms_key" "parameter_store" {
   description             = "Parameter store kms master key"
   deletion_window_in_days = 10
