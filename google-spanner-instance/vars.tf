@@ -9,5 +9,5 @@ variable "number_of_nodes" {
 
 variable "spanner_config_location" {
   description = "location for the spanner instance"
-  default     = "us-central1"
+  default     = "regional-us-central1"
 }
