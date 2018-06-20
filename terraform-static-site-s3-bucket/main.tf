@@ -1,6 +1,4 @@
-provider "aws" {
-  region = "${var.region}"
-}
+provider "aws" {}
 
 resource "aws_s3_bucket" "b" {
   bucket = "${var.bucket_name}"

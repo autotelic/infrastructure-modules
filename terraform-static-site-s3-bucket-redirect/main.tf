@@ -1,6 +1,4 @@
-provider "aws" {
-  region = "${var.region}"
-}
+provider "aws" {}
 
 resource "aws_s3_bucket" "redirect-bucket" {
   bucket = "redirect-${var.bucket_name}"
