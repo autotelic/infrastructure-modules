@@ -1,4 +1,6 @@
-provider "aws" {}
+provider "aws" {
+  region = "${var.region}"
+}
 
 resource "aws_s3_bucket" "b" {
   bucket = "${var.bucket_name}"
@@ -12,13 +14,15 @@ resource "aws_s3_bucket" "b" {
 
 data "aws_iam_policy_document" "b" {
   statement = {
-    sid =  "PublicReadGetObject"
+    sid    = "PublicReadGetObject"
     effect = "Allow"
+
     principals = {
-      type = "AWS"
+      type        = "AWS"
       identifiers = ["*"]
     }
-    actions = ["s3:GetObject"]
+
+    actions   = ["s3:GetObject"]
     resources = ["arn:aws:s3:::${var.bucket_name}/*"]
   }
 }
