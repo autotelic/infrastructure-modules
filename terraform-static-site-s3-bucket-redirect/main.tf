@@ -1,7 +1,7 @@
 provider "aws" {}
 
-resource "aws_s3_bucket" "redirect-bucket" {
-  bucket = "redirect-${var.bucket_name}"
+resource "aws_s3_bucket" "www-bucket" {
+  bucket = "www-${var.bucket_name}"
   acl    = "public-read"
 
   website {
