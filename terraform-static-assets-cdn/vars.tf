@@ -6,6 +6,11 @@ variable "bucket_name" {
   description = "name of bucket"
 }
 
+variable "bucket_region" {
+  description = "region of bucket"
+  default     = "us-west-2"
+}
+
 variable "prefix" {
   description = "object key prefix identifying one or more objects to which the old age lifecycle rule applies"
   default     = "assets/"
