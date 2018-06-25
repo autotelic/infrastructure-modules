@@ -1,6 +1,6 @@
 provider "aws" {}
 
-data "aws_iam_policy_document" "read_assets" {
+data "aws_iam_policy_document" "static_assets" {
   statement = {
     sid    = "PublicReadGetObject"
     effect = "Allow"

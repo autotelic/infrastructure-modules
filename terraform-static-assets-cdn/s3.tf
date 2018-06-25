@@ -21,5 +21,5 @@ resource "aws_s3_bucket" "static_assets" {
 
 resource "aws_s3_bucket_policy" "static_assets" {
   bucket = "${aws_s3_bucket.static_assets.id}"
-  policy = "${data.aws_iam_policy_document.read_assets.json}"
+  policy = "${data.aws_iam_policy_document.static_assets.json}"
 }
