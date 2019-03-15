@@ -1,4 +1,6 @@
 resource "aws_cloudfront_distribution" "s3_distribution" {
+  count = "${var.should_create_resource}"
+
   origin {
     domain_name = "${var.domain_name}"
     origin_id   = "${var.origin_id}"

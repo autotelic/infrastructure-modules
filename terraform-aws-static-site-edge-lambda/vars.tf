@@ -3,6 +3,11 @@ variable "aws_region" {
   default     = "us-west-2"
 }
 
+variable "has_bare_apex_redirect" {
+  description = "Enable redirect behavior from www to bare apex"
+  default     = false
+}
+
 variable "lambda_name" {
   description = "The name of the lambda"
   default     = "test-lambda"
@@ -33,12 +38,18 @@ variable "origin_id" {
   default     = "autotelic-b-d"
 }
 
-variable "site_domain" {
-  description = "cNAME for the distribution"
-  default     = "autotelic.com"
+variable "site_aliases" {
+  description = "aliases for the distribution"
+  default     = []
+  type        = "list"
 }
 
-variable "sub_domain" {
-  description = "subdomain for the distribution"
-  default     = "a"
+variable "redirect_aliases" {
+  description = "aliases for the redirect distribution"
+  default     = []
+  type        = "list"
+}
+
+variable "site_domain" {
+  description = "cNAME for the distribution"
 }

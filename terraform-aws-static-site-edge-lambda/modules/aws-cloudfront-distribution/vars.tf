@@ -14,3 +14,7 @@ variable "lambda_arn" {
 variable "origin_id" {
   description = "The unique ID for the cloudfront distribution"
 }
+
+variable "should_create_resource" {
+  default = true
+}
