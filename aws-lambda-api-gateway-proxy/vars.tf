@@ -1,9 +1,9 @@
 variable "lambda_name" {
-  description = "The name of the lambda"
+  description = "The name of the lambda function"
 }
 
 variable "runtime" {
-  default     = "nodejs6.10"
+  default     = "nodejs12.x"
   description = "The lambda runtime"
 }
 
@@ -26,3 +26,4 @@ variable "output_path" {
 variable "api_gateway_deployment_name" {
   description = "The name of the API gateway deployment"
 }
+
