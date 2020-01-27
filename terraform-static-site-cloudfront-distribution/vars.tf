@@ -11,3 +11,8 @@ variable "aliases" {
   type        = list(string)
 }
 
+variable "acm_arn" {
+  description = "the arn of the certificate"
+}
+
+
