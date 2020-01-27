@@ -1,7 +1,8 @@
-provider "aws" {}
+provider "aws" {
+}
 
 resource "aws_s3_bucket" "b" {
-  bucket = "${var.bucket_name}"
+  bucket = var.bucket_name
   acl    = "public-read"
 
   website {
@@ -11,11 +12,11 @@ resource "aws_s3_bucket" "b" {
 }
 
 data "aws_iam_policy_document" "b" {
-  statement = {
+  statement {
     sid    = "PublicReadGetObject"
     effect = "Allow"
 
-    principals = {
+    principals {
       type        = "AWS"
       identifiers = ["*"]
     }
@@ -26,6 +27,7 @@ data "aws_iam_policy_document" "b" {
 }
 
 resource "aws_s3_bucket_policy" "b" {
-  bucket = "${aws_s3_bucket.b.id}"
-  policy = "${data.aws_iam_policy_document.b.json}"
+  bucket = aws_s3_bucket.b.id
+  policy = data.aws_iam_policy_document.b.json
 }
+
