@@ -1,4 +1,5 @@
-provider "aws" {}
+provider "aws" {
+}
 
 resource "aws_s3_bucket" "www-bucket" {
   bucket = "www-${var.bucket_name}"
@@ -8,3 +9,4 @@ resource "aws_s3_bucket" "www-bucket" {
     redirect_all_requests_to = "https://${var.redirect_address}"
   }
 }
+
