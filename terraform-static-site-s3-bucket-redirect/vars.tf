@@ -5,3 +5,4 @@ variable "bucket_name" {
 variable "redirect_address" {
   description = "The address to redirect requests to"
 }
+
