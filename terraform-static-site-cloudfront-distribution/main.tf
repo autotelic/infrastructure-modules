@@ -1,9 +1,10 @@
-provider "aws" {}
+provider "aws" {
+}
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name = "${var.domain_name}"
-    origin_id   = "${var.origin_id}"
+    domain_name = var.domain_name
+    origin_id   = var.origin_id
 
     custom_origin_config {
       origin_protocol_policy = "http-only"
@@ -17,12 +18,12 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   enabled = true
 
-  aliases = "${var.aliases}"
+  aliases = var.aliases
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "${var.origin_id}"
+    target_origin_id = var.origin_id
 
     forwarded_values {
       query_string = true
@@ -39,7 +40,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = var.acm_arn
+    ssl_support_method  = "sni-only"
   }
 
   restrictions {
@@ -55,3 +57,4 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     response_page_path    = "/index.html"
   }
 }
+
