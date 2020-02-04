@@ -8,5 +8,11 @@ variable "domain_name" {
 
 variable "aliases" {
   description = "cNAMEs for the distribution"
-  type        = "list"
+  type        = list(string)
 }
+
+variable "acm_arn" {
+  description = "the arn of the certificate"
+}
+
+
