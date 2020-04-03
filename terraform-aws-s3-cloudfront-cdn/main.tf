@@ -61,10 +61,11 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       }
     }
 
+    compress               = true
     viewer_protocol_policy = "allow-all"
-    min_ttl                = 86400
-    default_ttl            = 86400
-    max_ttl                = 86400
+    min_ttl                = 0
+    default_ttl            = 31557600
+    max_ttl                = 31557600
   }
 
   price_class = var.price_class
