@@ -11,7 +11,7 @@ is written to an s3 bucket.
 | ----------- | -------------------------------------------------------- | -------- | ------- |
 | bucket_id   | ID of the s3 bucket that triggers the lambda             | yes      | none    |
 | bucket_arn  | arn of the s3 bucket that triggers the lambda            | yes      | none    |
-| s3_prefix   | A prefix that s3 objects must have to trigger the lambda | no       | "/"     |
+| s3_prefix   | A prefix that s3 objects must have to trigger the lambda | no       | ""      |
 | lambda_name | Name of the lambda function                              | yes      | none    |
 | runtime     | Lambda function runtime                                  | yes      | none    |
 | project_src | Directory that will be zipped to create the lambda       | yes      | none    |
