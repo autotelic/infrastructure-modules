@@ -11,7 +11,7 @@ variable "s3_prefix" {
   prefix will not invoke the lambda. Prefixes are treated like directories in s3 buckets.
   Defaults to the root of the bucket.
 EOF
-  default     = "/"
+  default     = ""
 }
 
 variable "lambda_name" {

@@ -33,7 +33,7 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
 }
 
 resource "aws_iam_role" "iam_for_lambda" {
-  name = "iam_for_lambda"
+  name = "iam_for_lambda_${var.lambda_name}"
 
   assume_role_policy = <<EOF
 {
@@ -52,7 +52,7 @@ EOF
 }
 
 resource "aws_iam_policy" "lambda_logging" {
-  name        = "lambda_logging"
+  name        = "${var.lambda_name}_lambda_logging"
   path        = "/"
   description = "IAM policy for logging from a lambda"
 
