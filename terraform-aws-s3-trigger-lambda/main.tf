@@ -13,11 +13,12 @@ resource "aws_lambda_permission" "allow_bucket" {
 }
 
 resource "aws_lambda_function" "func" {
-  filename      = data.archive_file.lambda_zip.output_path
-  function_name = var.lambda_name
-  role          = aws_iam_role.iam_for_lambda.arn
-  handler       = "index.handler"
-  runtime       = var.runtime
+  filename         = data.archive_file.lambda_zip.output_path
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
+  function_name    = var.lambda_name
+  role             = aws_iam_role.iam_for_lambda.arn
+  handler          = "index.handler"
+  runtime          = var.runtime
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
