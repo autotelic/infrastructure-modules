@@ -19,6 +19,7 @@ resource "aws_lambda_function" "func" {
   role             = aws_iam_role.iam_for_lambda.arn
   handler          = "index.handler"
   runtime          = var.runtime
+  timeout          = var.lambda_timeout
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
