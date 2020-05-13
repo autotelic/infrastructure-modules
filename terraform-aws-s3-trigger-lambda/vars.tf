@@ -25,3 +25,8 @@ variable "runtime" {
 variable "project_src" {
   description = "Directory that will be zipped to create the lambda"
 }
+
+variable "lambda_timeout" {
+  description = "Timeout for the lambda function (in seconds)"
+  default     = 3
+}
