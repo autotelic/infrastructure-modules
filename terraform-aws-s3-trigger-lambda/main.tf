@@ -20,6 +20,9 @@ resource "aws_lambda_function" "func" {
   handler          = "index.handler"
   runtime          = var.runtime
   timeout          = var.lambda_timeout
+  environment {
+    variables = var.lambda_env_vars
+  }
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
