@@ -1,7 +1,7 @@
 provider "aws" {
 }
 
-# From /terraform-static-site-s3-bucket
+# Non www-bucket
 resource "aws_s3_bucket" "b" {
   bucket = var.bucket_name
   acl    = "public-read"
@@ -32,7 +32,7 @@ resource "aws_s3_bucket_policy" "b" {
   policy = data.aws_iam_policy_document.b.json
 }
 
-# From /terraform-static-site-s3-bucket-redirect
+# www-bucket
 
 resource "aws_s3_bucket" "www-bucket" {
   bucket = "www-${var.bucket_name}"

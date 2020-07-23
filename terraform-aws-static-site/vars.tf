@@ -1,5 +1,5 @@
 variable "bucket_name" {
-    description = "The name of the S3 bucket"
+  description = "The name of the S3 bucket"
 }
 
 variable "redirect_address" {
@@ -17,6 +17,7 @@ variable "domain_name" {
 variable "aliases" {
   description = "cNAMEs for the distribution"
   type        = list(string)
+  default = "www.autotelic.com, www.autotelic.ca, autotelic.com, autotelic.ca"
 }
 
 variable "acm_arn" {
