@@ -1,7 +1,3 @@
-provider "aws" {
-    region = "us-west-2"
-}
-
 # Non www-bucket
 resource "aws_s3_bucket" "b" {
   bucket = var.bucket_name
