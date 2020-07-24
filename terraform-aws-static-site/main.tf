@@ -1,4 +1,3 @@
-# Non www-bucket
 resource "aws_s3_bucket" "non-www-bucket" {
   bucket = var.bucket_name
   acl    = "public-read"
@@ -30,7 +29,6 @@ resource "aws_s3_bucket_policy" "non-www-bucket" {
   policy = data.aws_iam_policy_document.non-www-bucket.json
 }
 
-# www-bucket
 resource "aws_s3_bucket" "www-bucket" {
   bucket = "www-${var.bucket_name}"
 
@@ -39,7 +37,6 @@ resource "aws_s3_bucket" "www-bucket" {
   }
 }
 
-# Non www-bucket CDN
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name = aws_s3_bucket.non-www-bucket.bucket_regional_domain_name
@@ -101,7 +98,6 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 }
 
-// www-bucket CDN
 resource "aws_cloudfront_distribution" "www_s3_distribution" {
   origin {
     domain_name = aws_s3_bucket.www-bucket.bucket_regional_domain_name
