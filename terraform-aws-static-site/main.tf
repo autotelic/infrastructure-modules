@@ -31,7 +31,7 @@ resource "aws_s3_bucket_policy" "b" {
 
 # www-bucket
 resource "aws_s3_bucket" "www-bucket" {
-  bucket = "www-${var.www_bucket_name}"
+  bucket = "www-${var.bucket_name}"
   acl    = "public-read"
 
   website {
