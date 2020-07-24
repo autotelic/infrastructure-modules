@@ -44,8 +44,11 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     domain_name = aws_s3_bucket.non-www-bucket.bucket_regional_domain_name
     origin_id   = var.origin_id
 
-    custom_origin_config {
+    s3_origin_config {
       origin_access_indentity= aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
+    }
+
+    custom_origin_config {
       origin_protocol_policy = "http-only"
       http_port              = "80"
       https_port             = "443"
