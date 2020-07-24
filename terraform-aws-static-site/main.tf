@@ -94,9 +94,6 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     response_code         = "200"
     response_page_path    = "/index.html"
   }
-  depends_on = [
-    aws_s3_bucket.non-www-bucket
-  ]
 }
 
 // www-bucket CDN
@@ -154,9 +151,6 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
     response_code         = "200"
     response_page_path    = "/index.html"
   }
-  depends_on = [
-    aws_s3_bucket.www-bucket
-  ]
 }
 
 
