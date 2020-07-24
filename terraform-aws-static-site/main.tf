@@ -15,13 +15,15 @@ data "aws_iam_policy_document" "non-www-bucket" {
 
     principals {
       type        = "AWS"
-      identifiers = ["aws_cloudfront_origin_access_identity.origin_access_indentity.iam_arn"]
+      identifiers = [aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn]
     }
 
     actions   = ["s3:GetObject"]
     resources = ["arn:aws:s3:::${var.bucket_name}/*"]
   }
 }
+
+resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {}
 
 resource "aws_s3_bucket_policy" "non-www-bucket" {
   bucket = aws_s3_bucket.non-www-bucket.id
@@ -45,7 +47,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     origin_id   = var.origin_id
 
     s3_origin_config {
-      origin_access_indentity= aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
+      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
     }
 
     custom_origin_config {
