@@ -42,7 +42,7 @@ resource "aws_s3_bucket" "www-bucket" {
 # Non www-bucket CDN
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name = var.domain_name
+    domain_name = aws_s3_bucket.b.bucket_regional_domain_name
     origin_id   = var.origin_id
 
     custom_origin_config {
@@ -94,12 +94,15 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     response_code         = "200"
     response_page_path    = "/index.html"
   }
+  depends_on = [
+    aws_s3_bucket.b
+  ]
 }
 
 // www-bucket CDN
 resource "aws_cloudfront_distribution" "www_s3_distribution" {
   origin {
-    domain_name = var.www_domain_name
+    domain_name = aws_s3_bucket.www-bucket.bucket_regional_domain_name
     origin_id   = var.www_origin_id
 
     custom_origin_config {
@@ -151,6 +154,9 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
     response_code         = "200"
     response_page_path    = "/index.html"
   }
+  depends_on = [
+    aws_s3_bucket.www-bucket
+  ]
 }
 
 
