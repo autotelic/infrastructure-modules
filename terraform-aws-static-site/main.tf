@@ -11,12 +11,11 @@ resource "aws_s3_bucket" "non-www-bucket" {
 
 data "aws_iam_policy_document" "non-www-bucket" {
   statement {
-    sid    = "PublicReadGetObject"
     effect = "Allow"
 
     principals {
       type        = "AWS"
-      identifiers = ["*"]
+      identifiers = ["aws_cloudfront_origin_access_identity.origin_access_indentity.iam_arn"]
     }
 
     actions   = ["s3:GetObject"]
@@ -46,6 +45,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     origin_id   = var.origin_id
 
     custom_origin_config {
+      origin_access_indentity= aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
       origin_protocol_policy = "http-only"
       http_port              = "80"
       https_port             = "443"
