@@ -1,5 +1,5 @@
 # Non www-bucket
-resource "aws_s3_bucket" "b" {
+resource "aws_s3_bucket" "non-www-bucket" {
   bucket = var.bucket_name
   acl    = "public-read"
 
@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "b" {
   }
 }
 
-data "aws_iam_policy_document" "b" {
+data "aws_iam_policy_document" "non-www-bucket" {
   statement {
     sid    = "PublicReadGetObject"
     effect = "Allow"
@@ -24,9 +24,9 @@ data "aws_iam_policy_document" "b" {
   }
 }
 
-resource "aws_s3_bucket_policy" "b" {
-  bucket = aws_s3_bucket.b.id
-  policy = data.aws_iam_policy_document.b.json
+resource "aws_s3_bucket_policy" "non-www-bucket" {
+  bucket = aws_s3_bucket.non-www-bucket.id
+  policy = data.aws_iam_policy_document.non-www-bucket.json
 }
 
 # www-bucket
@@ -42,7 +42,7 @@ resource "aws_s3_bucket" "www-bucket" {
 # Non www-bucket CDN
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name = aws_s3_bucket.b.bucket_regional_domain_name
+    domain_name = aws_s3_bucket.non-www-bucket.bucket_regional_domain_name
     origin_id   = var.origin_id
 
     custom_origin_config {
@@ -95,7 +95,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     response_page_path    = "/index.html"
   }
   depends_on = [
-    aws_s3_bucket.b
+    aws_s3_bucket.non-www-bucket
   ]
 }
 
