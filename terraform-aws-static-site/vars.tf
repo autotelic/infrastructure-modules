@@ -23,3 +23,7 @@ variable "www_aliases" {
   description = "cNAMEs for the distribution"
   type        = list(string)
 }
+
+variable "acm_arn" {
+  description = "The ARN of the certificate"
+}
