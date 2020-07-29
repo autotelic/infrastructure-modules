@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "non-www-bucket" {
 
     principals {
       type        = "AWS"
-      identifiers = ["*"]
+      identifiers = [aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn]
     }
 
     actions   = ["s3:GetObject"]
