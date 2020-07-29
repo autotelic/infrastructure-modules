@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "non-www-bucket" {
 
     principals {
       type        = "AWS"
-      identifiers = [aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn]
+      identifiers = ["*"]
     }
 
     actions   = ["s3:GetObject"]
@@ -31,6 +31,7 @@ resource "aws_s3_bucket_policy" "non-www-bucket" {
 
 resource "aws_s3_bucket" "www-bucket" {
   bucket = "www-${var.bucket_name}"
+  acl = "public-read"
 
   website {
     redirect_all_requests_to = "https://${var.redirect_address}"
@@ -39,12 +40,8 @@ resource "aws_s3_bucket" "www-bucket" {
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name = aws_s3_bucket.non-www-bucket.bucket_regional_domain_name
+    domain_name = aws_s3_bucket.non-www-bucket.website_endpoint
     origin_id   = var.origin_id
-
-    s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
-    }
 
     custom_origin_config {
       origin_protocol_policy = "http-only"
@@ -53,12 +50,14 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       origin_ssl_protocols   = ["TLSv1"]
     }
   }
-
+  
   price_class = "PriceClass_100"
 
   enabled = true
 
   aliases = var.aliases
+
+  default_root_object = "index.html"
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
@@ -101,7 +100,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
 resource "aws_cloudfront_distribution" "www_s3_distribution" {
   origin {
-    domain_name = aws_s3_bucket.www-bucket.bucket_regional_domain_name
+    domain_name = aws_s3_bucket.www-bucket.website_endpoint
     origin_id   = var.www_origin_id
 
     custom_origin_config {
@@ -116,7 +115,7 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
 
   enabled = true
 
-  aliases = var.aliases
+  aliases = var.www_aliases
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
