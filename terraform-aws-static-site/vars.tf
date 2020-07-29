@@ -16,7 +16,7 @@ variable "aliases" {
 }
 
 variable "www_origin_id" {
-  description = "The unique ID for the cloudfront distribution"
+  description = "The unique ID for the www cloudfront distribution"
 }
 
 variable "www_aliases" {
