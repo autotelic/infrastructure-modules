@@ -15,15 +15,13 @@ data "aws_iam_policy_document" "non-www-bucket" {
 
     principals {
       type        = "AWS"
-      identifiers = [aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn,"*"]
+      identifiers = ["*"]
     }
 
     actions   = ["s3:GetObject"]
     resources = ["arn:aws:s3:::${var.bucket_name}/*"]
   }
 }
-
-resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {}
 
 resource "aws_s3_bucket_policy" "non-www-bucket" {
   bucket = aws_s3_bucket.non-www-bucket.id
